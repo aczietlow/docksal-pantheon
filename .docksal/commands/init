@@ -166,7 +166,7 @@ init_settings
 if [[ $DOCKER_RUNNING == "true" ]]; then
 	echo -e "${green_bg} Step 2 ${NC}${green} Docker is already running. Use fin reset if you need to recreate a container${NC}"
 	fin reset -f
-  fin download-db
+    fin download-db
 else
 	echo -e "${green_bg} Step 2 ${NC}${green} Creating services...${NC}"
 	fin up
@@ -174,7 +174,6 @@ fi
 
 echo -e "${green_bg} Step 3 ${NC}${green} Initializing Drupal...${NC}"
 install_dependencies
-fin sanitize-db
 rebuild_cache
 
 if is_windows; then

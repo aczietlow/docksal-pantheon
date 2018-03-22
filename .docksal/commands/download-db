@@ -56,7 +56,7 @@ echo-green "Importing db..."
 # TODO make mysql_import faster.
 fin db import $ARTIFACT_PATH/$latest_backup_timestamp
 echo-green "Waiting for MySQL to initialize..."
-sleep 60
+sleep 120
 
 echo -e "${green_bg} Sanitizing ${NC}${green}Making the database safe again ${NC}"
 fin sanitize-db
