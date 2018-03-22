@@ -61,16 +61,3 @@ fi
 
 # Launch Behat tests
 fin exec "bin/behat -p docker $params"
-
-
-if [ "$DIXON_FUN" == 1 ]; then
-    if [ $? -eq 0 ]; then
-        user=$(whoami)
-        if [ "$user" == "czietlow" ] || [ "$user" == "ccrampton" ] || [ "$user" == "jrokisky" ] || [ "$user" == "mbross" ]; then
-            art=$(cat "$PROJECT_ROOT/.docksal/media/unicorn.txt")
-            echo "$art" | base64 -D; echo
-            afplay "$PROJECT_ROOT/.docksal/media/swage_airhorn.m4a"
-        fi
-    fi
-fi
-

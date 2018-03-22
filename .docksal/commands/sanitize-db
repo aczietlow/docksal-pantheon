@@ -25,5 +25,4 @@ password=${dbpassword:-root}
 echo -en "${green_bg} Sanitizing database ${NC} "
 
 # Sanitize users data.
-fin docker exec $(fin docker-compose ps -q db) mysql -uroot -proot default -e "UPDATE users SET mail = CONCAT(name, '@localhost'), init = CONCAT(name, '@localhost'), pass = MD5(CONCAT('MILDSECRET', name)) WHERE mail NOT LIKE '%mindgrub.com' AND mail NOT LIKE '%dixonvalve.c%';"
-
+fin docker exec $(fin docker-compose ps -q db) mysql -uroot -proot default -e "UPDATE users SET mail = CONCAT(name, '@localhost'), init = CONCAT(name, '@localhost'), pass = MD5(CONCAT('MILDSECRET', name)) WHERE mail NOT LIKE '%mindgrub.com';"

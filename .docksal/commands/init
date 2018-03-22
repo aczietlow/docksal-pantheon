@@ -104,10 +104,8 @@ init_settings ()
 {
 	copy_settings_file "${PROJECT_ROOT}/config/settings.docksal.php" "${SITEDIR_PATH}/settings.local.php"
 	copy_settings_file "${PROJECT_ROOT}/config/behat.yml.dist" "${PROJECT_ROOT}/behat.yml"
-	if [ -z $DOCKER_CI_SERVER ]; then
-	    copy_settings_file "${PROJECT_ROOT}/config/docksal-local.env" "${PROJECT_ROOT}/.docksal/docksal-local.env"
-	    copy_settings_file "${PROJECT_ROOT}/config/docksal-local.yml" "${PROJECT_ROOT}/.docksal/docksal-local.yml"
-	fi
+	copy_settings_file "${PROJECT_ROOT}/config/docksal-local.env" "${PROJECT_ROOT}/.docksal/docksal-local.env"
+	copy_settings_file "${PROJECT_ROOT}/config/docksal-local.yml" "${PROJECT_ROOT}/.docksal/docksal-local.yml"
 }
 
 # Install project dependencies
@@ -119,10 +117,6 @@ if [[ ! -d "$PROJECT_ROOT/vendor" ]]; then
 	fin exec "composer install --prefer-source --no-interaction"
 fi
 
-# TODO: Install FED dependencies too.
-#if [ -z $DOCKER_CI_SERVER ]; then
-#   Install FED stuffs.
-#fi
 }
 # Create the file directory.
 create_directories ()
@@ -143,37 +137,12 @@ fix_permissions ()
 	chmod 755 "${SITEDIR_PATH}"
 }
 
-# Configures docksal VM settings.
-configure_docksal_vm ()
-{
-    # Again... Dixon's db is a problem child.
-    export VBOX_HDD=90000
-}
-
-add_hosts()
-{
-    dixon_domains="local.cms.dixonvalve.com,local-australia.cms.dixonvalve.com,local-china.cms.dixonvalve.com,local-india.cms.dixonvalve.com,local-singapore.cms.dixonvalve.com,local-canada.cms.dixonvalve.com,local-europe.cms.dixonvalve.com"
-    if ! grep -q $dixon_domains "/etc/hosts"; then
-       fin hosts add $dixon_domains
-     fi
-}
-
 rebuild_cache()
 {
   cd $DOCROOT_PATH
 
 	# Kick the cache thrice times, just to be sure.
 	fin exec "drush cc all"
-}
-
-enable_dev_modules()
-{
-  fin exec "drush en dixon_development -y"
-}
-
-fix_solr()
-{
-  fin solr
 }
 
 #-------------------------- END: Functions --------------------------------
@@ -185,56 +154,38 @@ if [[ "$PROJECT_ROOT" == "" ]]; then
 	exit 1
 fi
 
-if [ -z $DOCKER_CI_SERVER ]; then
-    echo-red "Fin init will destroy and recreate the entire project. All database changes will be lost."
-    _confirm "Are you sure you want to continue?"
-fi
+echo-red "Fin init will destroy and recreate the entire project. All database changes will be lost."
+_confirm "Are you sure you want to continue?"
+
 # Project initialization steps
 echo -e "${green_bg} Step 1 ${NC}${green} Initializing local project configuration...${NC}"
 create_directories
 fix_permissions
 init_settings
 
-if [ !is_linux ]; then
-    configure_docksal_vm
-fi
-
 if [[ $DOCKER_RUNNING == "true" ]]; then
-    if [ -z $DOCKER_CI_SERVER ]; then
 	echo -e "${green_bg} Step 2 ${NC}${green} Docker is already running. Use fin reset if you need to recreate a container${NC}"
 	fin reset -f
-	fi
+  fin download-db
 else
 	echo -e "${green_bg} Step 2 ${NC}${green} Creating services...${NC}"
 	fin up
-fi
-
-if [ -z $DOCKER_CI_SERVER ]; then
-    # @TODO It currently takes mysql WAY TOO LONG TO INITIALIZE
-    # See https://github.com/docksal/docksal/pull/141
-    echo "Waiting for MySQL to initialize... (It's a big database)";
-    sleep 240
 fi
 
 echo -e "${green_bg} Step 3 ${NC}${green} Initializing Drupal...${NC}"
 install_dependencies
 fin sanitize-db
 rebuild_cache
-fix_solr
 
 if is_windows; then
     # TODO: I think the VM ip is already set as a variable.
 	echo-green "Add ${VIRTUAL_HOST} to your hosts file (/etc/hosts), e.g.:"
 	echo-green "192.168.64.100 ${VIRTUAL_HOST}"
 	echo
-else
-    echo -e "${green_bg} Step 4 ${NC}${green} Adding hosts entries${NC}"
-    add_hosts
 fi
 
-if [ -z $DOCKER_CI_SERVER ]; then
-    echo -en "${green_bg} DONE! May the swage be with you. ${NC} "
-    echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
-    fin uli
-fi
+echo -en "${green_bg} DONE! May the force be with you. ${NC} "
+echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
+fin uli
+
 #-------------------------- END: Execution --------------------------------

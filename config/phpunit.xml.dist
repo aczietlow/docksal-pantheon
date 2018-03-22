@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./vendor/autoload.php">
-    <testsuites>
-        <testsuite name="Dixon API Test Suite">
-            <directory suffix=".php">./tests/phpunit/tests/</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>

@@ -38,7 +38,6 @@ set_local_solr_environments()
 {
   SOLR_PORT=$(docker-compose port solr 8983 2>/dev/null | sed "s/0\.0\.0\.0://")
   fin drush solr-set-env-url http://$VIRTUAL_HOST:$SOLR_PORT/solr --id=solr
-  fin drush solr-set-env-url http://$VIRTUAL_HOST:$SOLR_PORT/solr --id=dixon_products
 }
 #-------------------------- END: Functions --------------------------------
 

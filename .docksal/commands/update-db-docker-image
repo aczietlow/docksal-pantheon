@@ -37,12 +37,12 @@ now_timestamp=$(date -j -v-1d +%s)
 if [[ $(( $latest_backup_timestamp - 60*60*24 )) < $(($now_timestamp - 60*60*24)) ]]
 then
   echo -e "${green_bg} Creating Backup ${NC}${green} Couldn't find a backup less than 24 hours old.${NC}"
-  $TERMINUS backup:create dixon-ecommerce.live --element=db
+  $TERMINUS backup:create ${PANTHEON_SITE}.live --element=db
 fi
 
 # Fetch a new db.
 echo -e "${green_bg} Fetching ${NC}${green} Fetching new backup ${NC}"
-$TERMINUS backup:get dixon-ecommerce.live --element=db --to=$ARTIFACT_PATH/$latest_backup_timestamp.gz
+$TERMINUS backup:get ${PANTHEON_SITE}.live --element=db --to=$ARTIFACT_PATH/$latest_backup_timestamp.gz
 echo -e "${green_bg} Extracting ${NC}${green} Extracting new backup ${NC}"
 gunzip $ARTIFACT_PATH/$latest_backup_timestamp.gz
 
@@ -50,21 +50,11 @@ gunzip $ARTIFACT_PATH/$latest_backup_timestamp.gz
 echo-green "Importing db..."
 # TODO make mysql_import faster.
 fin db import $ARTIFACT_PATH/$latest_backup_timestamp
-echo-green "Waiting for MySQL to initialize... (It's a big database)"
-sleep 240
+echo-green "Waiting for MySQL to initialize..."
+sleep 60
 
 echo -e "${green_bg} Sanitizing ${NC}${green}Making the database safe again ${NC}"
 fin sanitize-db
-
-# Make minor tweaks for local development.
-cd $DOCROOT_PATH
-fin solr
-fin drush en dixon_development -y
-
-# Truncate the tables we don't actually need.
-echo -e "${green_bg} Trimming ${NC}${green}Removing excess bloat ${NC}"
-fin trim-db
-fin drush cc all
 
 # Commit and push db snapshot with content
 echo -e "${green_bg} Committing ${NC}${green} committing image and pushing to dockerhub ${NC}"

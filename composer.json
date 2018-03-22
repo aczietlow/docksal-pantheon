@@ -1,6 +1,5 @@
 {
-    "name": "dixon/ecommerce-site",
-    "description": "Dixon Valve's public facing ecommerce website.",
+    "name": "aczietlow/docksal-pantheon",
     "repositories": [
         {
             "type": "vcs",
@@ -10,11 +9,7 @@
     "require": {
         "php": ">=5.5.9",
         "drupal/coder": "^8.2",
-        "phing/phing": "2.*",
-        "sebastian/phpcpd": "*",
-        "vinceg/usps-php-api": "^1.0",
-        "phpunit/phpunit": "^6.5",
-        "guzzlehttp/guzzle": "^6.3"
+        "sebastian/phpcpd": "*"
     },
     "require-dev": {
         "drupal/drupal-extension": "3.3.0",
@@ -27,78 +22,5 @@
     "config": {
         "bin-dir": "bin",
         "process-timeout": 1200
-    },
-    "autoload": {
-        "files": ["tests/behat/features/bootstrap/DixonSharedContexts.php"]
-    },
-    "authors": [
-        {
-            "name": "Brian Thompson",
-            "email": "bthompson@mindgrub.com"
-        },
-        {
-            "name": "Karen Landry",
-            "email": "klandry@mindgrub.com"
-        },
-        {
-            "name": "Karen Hurless",
-            "email": "khurless@dixonvalve.com"
-        },
-        {
-            "name": "Jenna L Campbell",
-            "email": "jlcampbell@dixonvalve.com"
-        },
-        {
-            "name": "George Best",
-            "email": "gbest@dixonvalve.com"
-        },
-        {
-            "name": "Will Cooper",
-            "email": "wcooper@mindgrub.com"
-        },
-        {
-            "name": "Joe Krukosky",
-            "email": "jkrukosky@mindgrub.com"
-        },
-        {
-            "name": "Liz Krukosky",
-            "email": "lkrukosky@mindgrub.com"
-        },
-        {
-            "name": "Darya Slobodyanik",
-            "email": "dslobodyanik@mindgrub.com"
-        },
-        {
-            "name": "Brian Andress",
-            "email": "bandress@mindgrub.com"
-        },
-        {
-            "name": "Dan Pindell",
-            "email": "dpindell@mindgrub.com"
-        },
-        {
-            "name": "Dave Wikoff",
-            "email": "dwikoff@mindgrub.com"
-        },
-        {
-            "name": "Joe Condon",
-            "email": "jcondon@mindgrub.com"
-        },
-        {
-            "name": "Brandon Heid",
-            "email": "bheid@mindgrub.com"
-        },
-        {
-            "name": "Liam Wade",
-            "email": "lwade@mindgrub.com"
-        },
-        {
-            "name": "Aaron Bickoff",
-            "email": "abickoff@mindgrub.com"
-        },
-        {
-            "name": "James Corrao",
-            "email": "jcorrao@mindgrub.com"
-        }
-    ]
+    }
 }
