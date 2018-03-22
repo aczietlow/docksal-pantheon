@@ -1,0 +1,35 @@
+
+.page-node .node-case-study {
+  .field {
+    margin-bottom: 0px;
+  }
+  .field-name-field-screenshot {
+    float: left;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    max-width: 65%;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .field-name-field-testimonial {
+    padding-top: 10px;
+    .field-label {
+      font-size: 125%;
+    }
+  }
+
+
+  .field-name-field-website {
+    clear: both;
+  }
+  .field-name-body {
+    clear: both;
+    padding-top: 15px;
+    .field-label {
+      font-size: 150%;
+    }
+  }
+}
+

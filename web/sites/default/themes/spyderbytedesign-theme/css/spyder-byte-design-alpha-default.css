@@ -1,0 +1,467 @@
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+/* line 12, ../sass/spyder-byte-design-alpha-default.scss */
+#page #region-branding {
+  position: static;
+  display: inline-block;
+  float: right;
+  width: 340px;
+  padding-right: 20px;
+}
+
+/* line 21, ../sass/spyder-byte-design-alpha-default.scss */
+#zone-branding-wrapper {
+  background: url('../images/cloud.png?1401075910');
+  position: relative;
+  z-index: 2;
+  background-position: right top;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 180px;
+}
+/* line 29, ../sass/spyder-byte-design-alpha-default.scss */
+#zone-branding-wrapper #region-header-first {
+  padding-top: 0;
+}
+
+/* line 35, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu {
+  float: right;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+/* line 39, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu li {
+  background: none;
+  background: url('../images/menu-underline.png?1401075910');
+  display: inline;
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  font-size: 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  padding: 20px 20px;
+}
+/* line 51, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu li a {
+  color: #003659;
+  padding: 0;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 125%;
+}
+/* line 57, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu li a:hover {
+  color: #000022;
+}
+/* line 60, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu li a:active {
+  color: #000022;
+}
+/* line 64, ../sass/spyder-byte-design-alpha-default.scss */
+#region-menu #main-menu li:hover {
+  background: url('../images/menu-underline-mouseover.png?1401075910');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+/* line 74, ../sass/spyder-byte-design-alpha-default.scss */
+#region-branding .site-name {
+  float: right;
+  margin-bottom: 0px;
+  margin-right: 10px;
+}
+
+/* line 81, ../sass/spyder-byte-design-alpha-default.scss */
+.front #zone-preface-wrapper {
+  background: url('../images/house.png?1401075910');
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  height: 290px;
+}
+/* line 87, ../sass/spyder-byte-design-alpha-default.scss */
+.front #zone-content-wrapper {
+  background: url('../images/house-slice.png?1401075910');
+  background-position: left;
+  background-repeat: repeat-y;
+  min-height: 100px;
+}
+/* line 92, ../sass/spyder-byte-design-alpha-default.scss */
+.front #zone-content-wrapper #zone-content {
+  position: relative;
+  z-index: 2;
+}
+/* line 98, ../sass/spyder-byte-design-alpha-default.scss */
+.front #zone-postscript-wrapper {
+  background: url('../images/house-slice.png?1401075910');
+  margin-top: -1px;
+  background-attachment: left;
+  background-repeat: repeat-y;
+  min-height: 1px;
+  padding-bottom: 50px;
+}
+/* line 107, ../sass/spyder-byte-design-alpha-default.scss */
+.front #zone-postscript-second-wrapper {
+  background: url('../images/grass.png?1401075910');
+  position: relative;
+  top: 45px;
+  z-index: 1;
+  min-height: 70px;
+  margin-top: -70px;
+}
+/* line 115, ../sass/spyder-byte-design-alpha-default.scss */
+.front .views-row {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+/* line 120, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-first-inner {
+  position: relative;
+  z-index: 3;
+}
+/* line 124, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner {
+  display: block;
+  background: none;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+}
+/* line 131, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #html5css3 {
+  margin-top: 50px;
+}
+/* line 132, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #drupalisawesome {
+  margin-top: 110px;
+}
+/* line 133, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #theprocess {
+  margin-top: 40px;
+}
+/* line 134, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #whywerock {
+  margin-top: 130px;
+}
+/* line 135, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #technology {
+  margin-top: 60px;
+}
+/* line 136, ../sass/spyder-byte-design-alpha-default.scss */
+.front .region-preface-second-inner #aboutus {
+  margin-top: 110px;
+}
+
+/* line 140, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-content-wrapper {
+  background: url('../images/house-slice_half-size.png?1401075910');
+  background-repeat: repeat-y;
+  background-position: left;
+}
+/* line 145, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-preface-wrapper {
+  background: url('../images/house_half-size.png?1401075910');
+  min-height: 147px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+/* line 150, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-preface-wrapper #zone-preface {
+  background: url('../images/cloud-header.png?1401075910');
+  min-height: 170px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+/* line 158, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-content-wrapper {
+  background: url('../images/house-slice_half-size.png?1401075910');
+  background-position: left;
+  background-repeat: repeat-y;
+  min-height: 200px;
+}
+/* line 164, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-postscript-wrapper {
+  background: url('../images/house-slice_half-size.png?1401075910');
+  background-attachment: left;
+  background-repeat: repeat-y;
+  min-height: 1px;
+  padding-bottom: 50px;
+}
+/* line 171, ../sass/spyder-byte-design-alpha-default.scss */
+.not-front #zone-postscript-second-wrapper {
+  margin-top: -70px;
+}
+
+/* line 180, ../sass/spyder-byte-design-alpha-default.scss */
+#zone-footer-wrapper {
+  background: url('../images/dirt.png?1401075910');
+  position: relative;
+  z-index: 2;
+  background-repeat: repeat;
+  min-height: 150px;
+}
+
+/* line 189, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block .droplet {
+  float: left;
+  width: 13.5%;
+  height: 105px;
+  margin: 0 1%;
+  position: relative;
+  top: -300px;
+  left: 100px;
+}
+/* line 199, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #aboutus {
+  background: url('../images/aboutus.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 202, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #aboutus.active {
+  background: url('../images/aboutus-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 206, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #aboutus.rollover {
+  background: url('../images/aboutus-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 212, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #html5css3 {
+  background: url('../images/html5css3.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 215, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #html5css3.active {
+  background: url('../images/html5css3-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 219, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #html5css3.rollover {
+  background: url('../images/html5css3-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 224, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #theprocess {
+  background: url('../images/theprocess.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 227, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #theprocess.active {
+  background: url('../images/theprocess-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 231, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #theprocess.rollover {
+  background: url('../images/theprocess-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 236, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #technology {
+  background: url('../images/technology.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 239, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #technology.active {
+  background: url('../images/technology-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 243, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #technology.rollover {
+  background: url('../images/technology-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 248, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #whywerock {
+  background: url('../images/whywerock.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 251, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #whywerock.active {
+  background: url('../images/whywerock-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 255, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #whywerock.rollover {
+  background: url('../images/whywerock-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 260, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #drupalisawesome {
+  background: url('../images/drupalisawesome.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 263, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #drupalisawesome.active {
+  background: url('../images/drupalisawesome-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+/* line 267, ../sass/spyder-byte-design-alpha-default.scss */
+#block-front-page-blocks-droplet-block #drupalisawesome.rollover {
+  background: url('../images/drupalisawesome-mouseover.png?1401075910');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+/* line 275, ../sass/spyder-byte-design-alpha-default.scss */
+.node-webform #webform-component-image {
+  background: url('../images/contact-spider.png?1401075910');
+  background-size: 100% auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  width: 40%;
+  margin-right: 5%;
+  margin-top: 35px;
+  height: 400px;
+  float: right;
+}
+/* line 286, ../sass/spyder-byte-design-alpha-default.scss */
+.node-webform .webform-component {
+  max-width: 45%;
+  float: left;
+}
+/* line 290, ../sass/spyder-byte-design-alpha-default.scss */
+.node-webform #webform-component-company {
+  clear: none;
+}
+/* line 293, ../sass/spyder-byte-design-alpha-default.scss */
+.node-webform .form-submit {
+  float: left;
+  clear: left;
+  margin-bottom: 15px;
+}
+
+/* line 304, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .region-preface-second-inner .views-field-field-picture a img, .page-node-6 .region-preface-second-inner .views-field-field-picture a img {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: url("../images/desaturate.svg#greyscale");
+  -moz-transition: filter, 0.5s;
+  -o-transition: filter, 0.5s;
+  -webkit-transition: filter, 0.5s;
+  transition: filter, 0.5s;
+}
+/* line 314, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .region-preface-second-inner .views-field-field-picture a:hover img, .page-node-6 .region-preface-second-inner .views-field-field-picture a:hover img {
+  -webkit-filter: none;
+  -moz-filter: none;
+  -ms-filter: none;
+  -o-filter: none;
+  filter: none;
+}
+/* line 323, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .region-preface-second-inner .views-field-field-picture a.active img, .page-node-6 .region-preface-second-inner .views-field-field-picture a.active img {
+  -webkit-filter: none;
+  -moz-filter: none;
+  -ms-filter: none;
+  -o-filter: none;
+  filter: none;
+}
+/* line 335, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .field-name-field-picture, .page-node-6 .field-name-field-picture {
+  float: right;
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+/* line 339, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .field-name-field-picture .field-item, .page-node-6 .field-name-field-picture .field-item {
+  -moz-box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+}
+/* line 343, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-team-member .field-name-body, .page-node-6 .field-name-body {
+  text-align: justify;
+}
+
+/* line 351, ../sass/spyder-byte-design-alpha-default.scss */
+.node-type-page .node-page .field-name-field-basic-page-image {
+  -moz-box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 3, ../sass/_case-study.scss */
+.page-node .node-case-study .field {
+  margin-bottom: 0px;
+}
+/* line 6, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-field-screenshot {
+  float: left;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  max-width: 65%;
+}
+/* line 11, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-field-screenshot img {
+  max-width: 100%;
+  height: auto;
+}
+/* line 16, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-field-testimonial {
+  padding-top: 10px;
+}
+/* line 18, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-field-testimonial .field-label {
+  font-size: 125%;
+}
+/* line 24, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-field-website {
+  clear: both;
+}
+/* line 27, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-body {
+  clear: both;
+  padding-top: 15px;
+}
+/* line 30, ../sass/_case-study.scss */
+.page-node .node-case-study .field-name-body .field-label {
+  font-size: 150%;
+}
+
+/* line 3, ../sass/_service.scss */
+.view-services .views-row {
+  max-width: 48%;
+}

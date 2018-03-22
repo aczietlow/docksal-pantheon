@@ -1,0 +1,26 @@
+.node-blog {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #upper, #middle, #bottom {
+    clear: both;
+  }
+
+  .field-name-field-top-left-image, .field-name-field-middle-left-image, .field-name-field-bottom-left-image {
+    float: left;
+    max-width: 10%;
+    margin: 10px;
+  }
+
+  .field-name-body, .field-name-field-middle-content, .field-name-field-bottom-content {
+    padding-top: 10px;
+  }
+
+  .field-name-field-top-right-image, .field-name-field-middle-right-image, .field-name-field-bottom-right-image {
+    float: right;
+    max-width: 10%;
+    margin: 10px;
+  }
+}

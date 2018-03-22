@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+## Creates a new docker database image using the backup of the live environment.
+##
+## Usage: fin update-db-docker-image
+
+# Abort if anything fails
+set -e
+
+SITE_DIRECTORY="default"
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+ARTIFACT_PATH="${PROJECT_ROOT}/artifacts"
+TERMINUS="${PROJECT_ROOT}/bin/terminus"
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+# TODO set terminus authentication if it isn't already.
+
+cd $PROJECT_ROOT
+# Make sure Composer dependencies are installed
+if [[ ! -d "$PROJECT_ROOT/vendor" ]]; then
+	fin exec "composer install --prefer-source --no-interaction"
+fi
+
+# Fetch the date of the most recent backup on the live environment.
+# TODO make work on Linux too. BSD ships with a different date.
+latest_backup_date=$(${TERMINUS} backup:info dixon-ecommerce.live --field date)
+latest_backup_timestamp=$(date -j -f "%Y-%m-%d %H:%M:%S" "${latest_backup_date}" "+%s")
+now_timestamp=$(date -j -v-1d +%s)
+# If latest backup is older than 24 hours get a new one.
+if [[ $(( $latest_backup_timestamp - 60*60*24 )) < $(($now_timestamp - 60*60*24)) ]]
+then
+  echo -e "${green_bg} Creating Backup ${NC}${green} Couldn't find a backup less than 24 hours old.${NC}"
+  $TERMINUS backup:create dixon-ecommerce.live --element=db
+fi

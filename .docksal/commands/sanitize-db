@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+## Sanitize the database
+
+# Abort if anything fails
+set -e
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+
+user=${dbuser:-root}
+password=${dbpassword:-root}
+
+echo -en "${green_bg} Sanitizing database ${NC} "
+
+# Sanitize users data.
+fin docker exec $(fin docker-compose ps -q db) mysql -uroot -proot default -e "UPDATE users SET mail = CONCAT(name, '@localhost'), init = CONCAT(name, '@localhost'), pass = MD5(CONCAT('MILDSECRET', name)) WHERE mail NOT LIKE '%mindgrub.com' AND mail NOT LIKE '%dixonvalve.c%';"
+

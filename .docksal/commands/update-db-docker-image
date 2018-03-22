@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+## Creates a new docker database image using the backup of the live environment.
+##
+## Usage: fin update-db-docker-image
+
+# Abort if anything fails
+set -e
+
+SITE_DIRECTORY="default"
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+ARTIFACT_PATH="${PROJECT_ROOT}/artifacts"
+TERMINUS="${PROJECT_ROOT}/bin/terminus"
+
+# TODO set terminus authentication
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+# Fetch the date of the most recent backup on the live environment.
+# TODO make work on Linux too. BSD ships with a different date.
+latest_backup_date=$(${TERMINUS} backup:info dixon-ecommerce.live --field date)
+latest_backup_timestamp=$(date -j -f "%Y-%m-%d %H:%M:%S" "${latest_backup_date}" "+%s")
+now_timestamp=$(date -j -v-1d +%s)
+# If latest backup is older than 24 hours get a new one.
+if [[ $(( $latest_backup_timestamp - 60*60*24 )) < $(($now_timestamp - 60*60*24)) ]]
+then
+  echo -e "${green_bg} Creating Backup ${NC}${green} Couldn't find a backup less than 24 hours old.${NC}"
+  $TERMINUS backup:create dixon-ecommerce.live --element=db
+fi
+
+# Fetch a new db.
+echo -e "${green_bg} Fetching ${NC}${green} Fetching new backup ${NC}"
+$TERMINUS backup:get dixon-ecommerce.live --element=db --to=$ARTIFACT_PATH/$latest_backup_timestamp.gz
+echo -e "${green_bg} Extracting ${NC}${green} Extracting new backup ${NC}"
+gunzip $ARTIFACT_PATH/$latest_backup_timestamp.gz
+
+# Import db into Drupal.
+echo-green "Importing db..."
+# TODO make mysql_import faster.
+fin db import $ARTIFACT_PATH/$latest_backup_timestamp
+echo-green "Waiting for MySQL to initialize... (It's a big database)"
+sleep 240
+
+echo -e "${green_bg} Sanitizing ${NC}${green}Making the database safe again ${NC}"
+fin sanitize-db
+
+# Make minor tweaks for local development.
+cd $DOCROOT_PATH
+fin solr
+fin drush en dixon_development -y
+
+# Truncate the tables we don't actually need.
+echo -e "${green_bg} Trimming ${NC}${green}Removing excess bloat ${NC}"
+fin trim-db
+fin drush cc all
+
+# Commit and push db snapshot with content
+echo -e "${green_bg} Committing ${NC}${green} committing image and pushing to dockerhub ${NC}"
+fin stop db
+tag=$(git describe --abbrev=0 --tags | sed 's/v//g')
+fin docker commit $(fin docker-compose ps -q db) czietlow/dixon-db:$tag
+fin docker push czietlow/dixon-db:$tag
+fin up
+
+# Remove content.
+echo-green "Waiting for MySQL to initialize... (It's a big database)"
+sleep 240
+echo -e "${green_bg} Purging ${NC}${green}Delete all content from database ${NC}"
+fin purge-all-content
+
+# Commit and push db snapshot with content
+echo -e "${green_bg} Committing ${NC}${green} committing image and pushing to dockerhub ${NC}"
+fin stop db
+fin docker commit $(fin docker-compose ps -q db) czietlow/dixon-db:ci-latest
+fin docker push czietlow/dixon-db:ci-latest
+fin up

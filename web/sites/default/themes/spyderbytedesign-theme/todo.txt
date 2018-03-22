@@ -1,0 +1,18 @@
+To Do
+---------------------
+
+DONE: Fix content slidein: .5 Hours
+DONE: White space on bottom for non-logged in users: .2 Hours
+DONE: Apply Styling from team member block to About Page: .2 Hours
+DONE: Style Contact Form: .5 Hours
+DONE: Style Portfolio Page: 3 Hours
+
+Style Team Member content type: 2 Hours
+Apply new graphics from Kaylan: 1 Hour 
+
+
+
+NOTES: 
+Styling on About Us page block is dependant on NID. (_team.scss);
+JQuery on front page is dependant on NID's. (droplets.js);
+

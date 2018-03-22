@@ -1,0 +1,438 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+@import "compass";
+
+#page {
+  @include background(image-url('bg-blue-texture.png'));
+  font-family: Helvetica,Arial,sans-serif !important;
+  h1, h2, h3, h4, h5, p {
+  font-family: Helvetica,Arial,sans-serif !important;
+  }
+  #first-time {
+    display: none;
+  }
+  input {
+    max-width: 100%;
+  }
+  #page-title {
+    @include box-shadow(8px 8px 4px rgba(0,0,0,.5));
+    background-color: rgb(142, 199, 74);
+  }
+  .node-links ul li a, .comment-links ul li a {
+    text-transform: lowercase;
+    display: block;
+    float: inline-block;
+  }
+  #region-branding {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+  #region-header-first {
+    padding-top: 75px;
+    max-width: 100%;
+    margin: 0;
+    margin-left: 0;
+    .logo-img {
+      float: none;
+      text-align: center;
+    }
+  }
+
+  .site-name {
+    font-family: 'Love Ya Like A Sister', cursive !important;
+    text-align: center;
+    margin-bottom: 10px;
+    a {
+      color: rgb(0, 25, 55);
+      &:hover {
+        color: darken(green, 20%);
+      }
+      &:active {
+        color: lighten(green, 20%);
+      }
+    }
+  }
+  .block {
+    margin-bottom: 20px;
+    .block-title {
+      text-align: center;
+    }
+  }
+
+  #block-views-blog-archive-block, .block-tagclouds {
+    .block-title {
+      text-align: left;
+    }
+
+    a.level6 {
+      color: rgb(142, 199, 74);
+      &:hover {
+        color: darken(rgb(142, 199, 74), 20%);
+      }
+    }
+    a.level5 {
+      color: rgb(122, 189, 89);
+      &:hover {
+        color: darken(rgb(122, 189, 89), 20%);
+      }
+    }
+    a.level4 {
+      color: rgb(87, 172, 115);
+      &:hover {
+        color: darken(rgb(87, 172, 115), 20%);
+      }
+    }
+    a.level3 {
+      color: rgb(50, 153, 142);
+      &:hover {
+        color: darken(rgb(50, 153, 142), 20%);
+      }
+    }
+    a.level2 {
+      color: rgb(17, 137, 166);
+      &:hover {
+        color: darken(rgb(17, 137, 166), 20%);
+      }
+    }
+    a.level1 {
+      color: rgb(0, 128, 178);
+      &:hover {
+        color: darken(rgb(0, 128, 178), 20%);
+      }
+    }
+
+  }
+  .pager li.pager-first a, .pager li.pager-previous a, .pager li.pager-next a, .pager li.pager-last a {
+    width: 60px;
+  }
+
+  #zone-postscript-second-wrapper {
+    @include background(image-url('grass.png'));
+    min-height: 70px;
+  }
+  #zone-footer-wrapper {
+    @include background(image-url('dirt.png') rgb(55,23,6));
+    position: relative;
+    z-index: 2;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    min-height: 168px;
+    padding-top: 20px;
+    .block {
+
+      .block-title {
+        @include box-shadow(6px 6px 3px rgba(0,0,0,0.5));
+        background-color: rgb(142, 199, 74);
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 0;
+      }
+      .content {
+        padding: 10px;
+        color: #FFF;
+        a {
+          color: #FFF;
+          &:hover {
+            color: rgb(142, 199, 74);
+          }
+        }
+      }
+    }
+  }
+}
+#region-menu {
+  .region-menu-inner {
+    line-height: 0;
+  }
+  #main-menu {
+    li {
+      line-height: 1em;
+      background-color: white;
+      border: 4px solid darken(#0082B5, 20%);
+      margin-left: auto;
+      margin-right: auto;
+      width: 90%;
+      display: block;
+      padding: 12px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+      text-align: center;
+      border-radius: 30px;
+      font-size: 120%;
+      a {
+        text-decoration: none;
+        padding: 12px 35%;
+        color: #0082B5;
+      }
+    }
+  }
+}
+
+.node-title {
+  padding: 0 10px;
+  background-color: rgb(93, 44, 15);
+  a {
+    color: white;
+    &:visited {
+      color: white;
+    }
+    &:hover {
+      color: rgb(142, 199, 74);
+    }
+  }
+}
+
+.node-title, #page-title {
+  text-align: center;
+  a {
+    text-align: center;
+    text-decoration: none;
+  }
+}
+
+.front {
+  .node-title {
+    padding: 0;
+  }
+  .node-title, .block-title {
+    background-color: rgb(142, 199, 74);
+    border-bottom: none !important;
+    a {
+      color: black;
+      &:visited {
+        color: black;
+      }
+      &:hover {
+        color: rgb(93, 44, 15);
+      }
+    }
+  }
+  .region-preface-second-inner {
+    display: none;
+  }
+  .views-row {
+    border-bottom: 4px solid #044A75;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    &.views-row-last {
+      border-bottom: none;
+    }
+  }
+}
+
+.region-preface-first-inner, .region-preface-second-inner, .region-preface-third-inner,  .region-content-inner, .region-postscript-first-inner, .region-postscript-second-inner, .region-postscript-third-inner, .region-sidebar-second .block, .region-sidebar-first .block
+{
+  padding: 5px 15px;
+  background-color: white;
+  border-radius: 12px 12px 12px 12px;
+  border: 10px solid rgb(4, 74, 117);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+
+  .block {
+    margin-bottom: 20px;
+  }
+  .block-title {
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+  }
+}
+
+.region-preface-first-inner, .region-preface-second-inner, .region-preface-third-inner, .region-postscript-first-inner, .region-postscript-second-inner, .region-postscript-third-inner
+{
+  margin: 20px 0;
+}
+
+// Actual Service node page.
+.node-service-page {
+  .field-name-field-image {
+    float: left;
+    margin: 5px 10px;
+  }
+}
+//Services view
+.view-services {
+  .views-row {
+    width: 98%;
+    margin: 10px 1%;
+    float: left;
+    .field-name-field-image {
+      float: left;
+      margin: 5px 10px;
+    }
+    .links {
+      float: right;
+    }
+  }
+}
+
+.region-sidebar-second {
+  .block-vital-stastics-block {
+    .node-title {
+      display: none;
+    }
+  }
+}
+
+//Contact form, though will apply to any webforms.
+.node-webform {
+  font-size: 110%;
+}
+
+//Blog content type styling
+.node-blog {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #upper, #middle, #bottom {
+    clear: both;
+  }
+
+  .field-name-field-top-left-image, .field-name-field-middle-left-image, .field-name-field-bottom-left-image {
+    float: left;
+    max-width: 20%;
+    margin: 10px;
+  }
+
+  .field-name-body, .field-name-field-middle-content, .field-name-field-bottom-content {
+    padding-top: 10px;
+  }
+
+  .field-name-field-top-right-image, .field-name-field-middle-right-image, .field-name-field-bottom-right-image {
+    float: right;
+    max-width: 20%;
+    margin: 10px;
+  }
+  .field-name-field-blog-tags {
+    font-size: 110%;
+    margin: 20px 0 10px;
+    .field-label {
+      margin-right: 5px;
+    }
+    a {
+      margin-right: 8px;
+    }
+  }
+  .node-team-member .node-teaser {
+    clear: both;
+  }
+}
+
+.node-blog .node-teaser {
+  margin-bottom: 20px;
+}
+
+//Portfolio Styling
+
+.page-portfolio {
+  .region-preface-second-inner {
+    border: none;
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  .region-content-inner {
+    border: none;
+    background-color: transparent;
+    @include box-shadow(none);
+    #page-title {
+      display: none;
+    }
+  }
+}
+
+.view-portfolio {
+  .views-row {
+    padding: 7px 7px 9px 7px;
+    background-color: #033452;
+  }
+  .views-field-field-screenshot {
+    @include box-shadow(5px 5px 2px rgba(0,0,0, 0.5));
+    background-color: rgb(250, 250, 250);
+    padding-top: 5px;
+    padding-right: 12px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      @include box-shadow(7px 7px 4px rgba(0,0,0, 0.5));
+    }
+  }
+  .views-field-title {
+    @include box-shadow(5px 5px 2px rgba(0,0,0, 0.5));
+    padding: 5px 5px;
+    background-color: rgb(250, 250, 250);
+    line-height: 1.2em;
+    .field-content {
+      line-height: 1.2em;
+      margin-bottom: 0;
+    }
+    a {
+      text-decoration: none;
+      text-transform: lowercase;
+      color: rgb(142, 199, 74);
+      &:hover {
+        color: rgb(93, 44, 15);
+      }
+    }
+  }
+}
+
+// Case study styling
+.page-node .node-case-study {
+  .field {
+    margin-bottom: 15px;
+  }
+  .field-name-field-screenshot {
+    max-width: 100%;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .field-name-field-website {
+    font-size: 150%;
+  }
+}
+
+
+
+//Basic Page Styling
+.node-page {
+  .field-name-field-basic-page-image {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+}
+.node-type-page {
+  .node-page {
+    .field-name-field-basic-page-image {
+      max-width: 330px;
+      border: 5px solid rgb(4, 74, 117);
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    @media (max-width: 600px) {
+      .field-name-field-basic-page-image {
+        float: none;
+        clear: both;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+
+@import 'team';

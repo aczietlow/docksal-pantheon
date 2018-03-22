@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function footer_block_info() {
+  $blocks['footer'] = array(
+    'info' => t('Footer, Spyder Byte Design'),
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function footer_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'footer':
+      $output = l('Website design', 'http://www.spyderbytedesign.com', array('attributes' => array('id' => 'spyderbyte'))) . ' by: Spyder Byte Design';
+      if (user_is_logged_in()) {
+        $output .= ' || ' . l('Admin Logout', 'user/logout');
+        if(user_access('access_content_overview')){
+          $output .= ' || ' . l('Manage', 'admin/content/node');
+        }
+      }
+      else {
+        $output .= ' || ' . l('Admin Login', 'user');
+      }
+    break;
+    case 'default':
+      $output = '<p> Powered by Spyder Byte Design';
+    break;
+  }
+  $block['title'] = '';
+  $block['content'] = $output;
+  return $block;
+}

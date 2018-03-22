@@ -1,0 +1,41 @@
+/* This file will hold styles that are loaded using the same media query as the normal grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
+/* line 6, ../sass/spyder-byte-design-alpha-default-normal.scss */
+#page #page-title {
+  width: 108%;
+  margin-left: -4%;
+}
+/* line 11, ../sass/spyder-byte-design-alpha-default-normal.scss */
+#page .grid-18 #page-title {
+  width: 110%;
+  margin-left: -5%;
+}
+
+/* line 20, ../sass/spyder-byte-design-alpha-default-normal.scss */
+.front #block-views-front-page-drop-block-block .node-title {
+  width: 120%;
+  margin-left: -10%;
+  -webkit-box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.5);
+}
+/* line 27, ../sass/spyder-byte-design-alpha-default-normal.scss */
+.front .region-content .node-title, .front .region-content .block-title {
+  width: 111%;
+  margin-left: -5.5%;
+}
+/* line 32, ../sass/spyder-byte-design-alpha-default-normal.scss */
+.front .block-title {
+  text-align: center;
+  width: 134%;
+  margin-left: -17%;
+  -webkit-box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 40, ../sass/spyder-byte-design-alpha-default-normal.scss */
+#block-tagclouds-2 {
+  font-size: 90%;
+}

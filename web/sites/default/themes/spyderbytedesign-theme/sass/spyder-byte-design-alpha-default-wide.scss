@@ -1,0 +1,42 @@
+/* This file will hold styles that are loaded using the same media query as the wide grid. */
+@import "compass";
+#page {
+  #page-title {
+    width: 106%;
+    margin-left: -3%;
+  } 
+
+  .grid-18, .grid-16 {
+    #page-title {
+      width: 108%;
+      margin-left: -4%;
+    }
+  }
+
+}
+
+.front {
+  #block-views-front-page-drop-block-block {
+    .node-title {
+      width: 116%;
+      margin-left: -8%;
+    }
+  }
+  .region-content {
+    .node-title, .block-title {
+      width: 108%;
+      margin-left: -4%;
+    }
+  }
+  .block-title {
+    text-align: center;
+    width: 124%;
+    margin-left: -12%;
+    @include box-shadow(6px 6px 3px rgba(0, 0, 0, 0.5));
+  }
+}
+
+#block-tagclouds-2 {
+  font-size: 100%;
+}
+

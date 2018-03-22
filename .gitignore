@@ -1,0 +1,11 @@
+.idea/
+
+bin/
+build/logs/
+node_modules/
+artifacts/*
+!artifacts/.gitkeep
+
+
+behat.yml
+composer.lock

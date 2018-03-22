@@ -1,0 +1,362 @@
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+@import "compass";
+
+@mixin droplet-backgrounds() {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+#page {
+  #region-branding {
+    position: static;
+    display: inline-block;
+    float: right;
+    width: 340px;
+    padding-right: 20px;
+  }
+}
+
+#zone-branding-wrapper {
+  @include background(image-url('cloud.png'));
+  position: relative;
+  z-index: 2;
+  background-position: right top;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 180px;
+  #region-header-first {
+    padding-top: 0;
+  }
+}
+
+#region-menu {
+  #main-menu {
+    float: right;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    li {
+      @include background(none);
+      @include background(image-url('menu-underline.png'));
+      display: inline;
+      background-color: transparent;
+      border-radius: 0;
+      border: 0;
+      font-size: 100%;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      padding: 20px 20px;
+      a {
+        color: rgb(0, 54, 89);
+        padding: 0;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 125%;
+        &:hover {
+          color: rgb(0, 0, 34);
+        }
+        &:active {
+          color: rgb(0, 0, 34);
+        }
+      }
+      &:hover {
+        @include background(image-url('menu-underline-mouseover.png'));
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+      }
+    }
+  }
+}
+#region-branding {
+  .site-name {
+    float: right;
+    margin-bottom: 0px;
+    margin-right: 10px;
+  }
+}
+.front {
+  #zone-preface-wrapper {
+    @include background(image-url('house.png'));
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    height: 290px;
+  }
+  #zone-content-wrapper {
+    @include background(image-url('house-slice.png'));
+    background-position: left;
+    background-repeat: repeat-y;
+    min-height: 100px;
+    #zone-content {
+
+    position: relative;
+    z-index: 2;
+    }
+  }
+  #zone-postscript-wrapper {
+    @include background(image-url('house-slice.png'));
+    // position: relative;
+    margin-top: -1px;
+    background-attachment: left;
+    background-repeat: repeat-y;
+    min-height: 1px;
+    padding-bottom: 50px;
+  }
+  #zone-postscript-second-wrapper {
+    @include background(image-url('grass.png'));
+    position: relative;
+    top: 45px;
+    z-index: 1;
+    min-height: 70px;
+    margin-top: -70px;
+  }
+  .views-row {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .region-preface-first-inner {
+    position: relative;
+    z-index: 3;
+  }
+  .region-preface-second-inner {
+    display: block;
+    background: none;
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+
+    #html5css3 { margin-top: 50px; }
+    #drupalisawesome { margin-top: 110px; }
+    #theprocess { margin-top: 40px; }
+    #whywerock { margin-top: 130px; }
+    #technology { margin-top: 60px; }
+    #aboutus { margin-top: 110px; }
+  }
+}
+.not-front {
+  #zone-content-wrapper {
+    @include background(image-url('house-slice_half-size.png'));
+    background-repeat: repeat-y;
+    background-position: left;
+  }
+  #zone-preface-wrapper {
+    @include background(image-url('house_half-size.png'));
+    min-height: 147px;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    #zone-preface {
+      @include background(image-url('cloud-header.png'));
+      min-height: 170px;
+      background-size: 100% auto;
+      background-repeat:no-repeat;
+      background-position: center center;
+    }
+  }
+  #zone-content-wrapper {
+    @include background(image-url('house-slice_half-size.png'));
+    background-position: left;
+    background-repeat: repeat-y;
+    min-height: 200px;
+  }
+  #zone-postscript-wrapper {
+    @include background(image-url('house-slice_half-size.png'));
+    background-attachment: left;
+    background-repeat: repeat-y;
+    min-height: 1px;
+    padding-bottom: 50px;
+  }
+  #zone-postscript-second-wrapper {
+    margin-top: -70px;
+  }
+}
+
+
+
+
+
+#zone-footer-wrapper {
+  @include background(image-url('dirt.png'));
+  position: relative;
+  z-index: 2;
+  background-repeat: repeat;
+  min-height: 150px;
+}
+
+#block-front-page-blocks-droplet-block {
+  .droplet {
+    float: left;
+    width: 13.5%;
+    height: 105px;
+    margin: 0 1%;
+    position: relative;
+    top: -300px;
+    left: 100px;
+  }
+
+  #aboutus {
+    @include background(image-url('aboutus.png'));
+    @include droplet-backgrounds;
+    &.active {
+     @include background(image-url('aboutus-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('aboutus-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+
+  }
+  #html5css3 {
+    @include background(image-url('html5css3.png'));
+    @include droplet-backgrounds;
+    &.active {
+      @include background(image-url('html5css3-mouseover.png'));
+      @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('html5css3-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+  }
+  #theprocess {
+    @include background(image-url('theprocess.png'));
+    @include droplet-backgrounds;
+    &.active {
+      @include background(image-url('theprocess-mouseover.png'));
+      @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('theprocess-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+  }
+  #technology {
+    @include background(image-url('technology.png'));
+    @include droplet-backgrounds;
+    &.active {
+      @include background(image-url('technology-mouseover.png'));
+      @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('technology-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+  }
+  #whywerock {
+    @include background(image-url('whywerock.png'));
+    @include droplet-backgrounds;
+    &.active {
+      @include background(image-url('whywerock-mouseover.png'));
+      @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('whywerock-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+  }
+  #drupalisawesome {
+    @include background(image-url('drupalisawesome.png'));
+    @include droplet-backgrounds;
+    &.active {
+      @include background(image-url('drupalisawesome-mouseover.png'));
+      @include droplet-backgrounds;
+    }
+    &.rollover {
+     @include background(image-url('drupalisawesome-mouseover.png'));
+     @include droplet-backgrounds;
+    }
+  }
+}
+
+.node-webform {
+  #webform-component-image {
+    @include background(image-url('contact-spider.png'));
+    background-size: 100% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 40%;
+    margin-right: 5%;
+    margin-top: 35px;
+    height: 400px;
+    float: right;
+  }
+  .webform-component {
+    max-width: 45%;
+    float: left;
+  }
+  #webform-component-company {
+    clear: none;
+  }
+  .form-submit {
+    float: left;
+    clear: left;
+    // margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+.node-type-team-member, .page-node-6 {
+  .region-preface-second-inner {
+    .views-field-field-picture {
+      a {
+        img {
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: url("../images/desaturate.svg#greyscale");
+        @include transition(filter, 0.5s);
+        }
+        &:hover {
+          img {
+          -webkit-filter: none;
+          -moz-filter: none;
+          -ms-filter: none;
+          -o-filter: none;
+          filter: none;
+          }
+        }
+        &.active {
+          img {
+           //filter: none;
+            -webkit-filter: none;
+            -moz-filter: none;
+            -ms-filter: none;
+            -o-filter: none;
+            filter: none;
+          }
+        }
+      }
+    }
+  }
+  .field-name-field-picture {
+    float: right;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    .field-item {
+      @include box-shadow(7px 7px 3px rgba(0,0,0,0.5));
+    }
+  }
+  .field-name-body {
+    text-align: justify;
+  }
+}
+
+//Basic Page Styling
+.node-type-page {
+  .node-page {
+    .field-name-field-basic-page-image {
+      @include box-shadow(7px 7px 3px rgba(0,0,0,0.5));
+    }
+  }
+}
+
+
+//Content Specific CSS
+//@import 'blog';
+@import 'case-study';
+@import 'service';
+//END Content Specific CSS

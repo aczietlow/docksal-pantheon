@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+## Run project's PhpUnit tests.
+##
+## Usage: fin php [arguments]
+##
+## path defaults to tests/phpunit/tests
+
+# Environment variables passed from fin:
+#
+#   $PROJECT_ROOT - (string) absolute path to NEAREST .docksal folder
+#   $VIRTUAL_HOST - (string) ex. projectname.docksal
+#   $DOCROOT - name of the docroot folder
+#   $DOCKER_RUNNING - (string) "true" or "false"
+
+copy_settings_file()
+{
+	local source="$1"
+	local dest="$2"
+
+	if [[ ! -f $dest ]]; then
+		echo "Copying ${dest}..."
+		cp $source $dest
+	else
+		echo-yellow "${dest} already in place."
+	fi
+}
+
+params=''
+path='tests/phpunit'
+for i in "$@"; do
+	case "$i" in
+#		--path=*)
+#			path="${i#*=}"
+#			;;
+		*)
+			params="$params$i "
+			;;
+	esac;
+done
+
+phpunit_config="$PROJECT_ROOT/phpunit.xml"
+if [[ ! -f "$phpunit_config" ]]; then
+    echo "Couldn't find a phpunit.xml, creating a default file."
+	copy_settings_file "${PROJECT_ROOT}/config/phpunit.xml.dist" "${SITEDIR_PATH}/phpunit.xml"
+fi
+
+cd $PROJECT_ROOT
+# Make sure Composer dependencies are installed
+if [[ ! -d "$PROJECT_ROOT/vendor" ]]; then
+	fin exec "composer install --prefer-source --no-interaction"
+fi
+
+# Launch Behat tests
+fin exec "bin/phpunit $params "
+

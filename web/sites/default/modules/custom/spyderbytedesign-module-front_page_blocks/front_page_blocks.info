@@ -1,0 +1,6 @@
+name = Front Page Blocks
+description = Drop and switch blocks for the front page.
+version = 1.0
+package = Spyder Byte Design Custom
+core = 7.x
+files[] = front-page-blocks.module

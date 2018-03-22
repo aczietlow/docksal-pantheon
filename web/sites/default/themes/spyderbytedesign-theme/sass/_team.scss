@@ -1,0 +1,67 @@
+
+
+//All Team member pages & About Us Page
+.node-type-team-member, .page-node-6 {
+  .region-preface-second-inner {
+    border: none;
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  .field-name-field-picture {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 330px;
+    margin-bottom: 15px;
+    border: 5px solid rgb(4, 74, 117);
+    .field-item {
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .field-name-body {
+
+  }
+}
+
+
+  //Just the block configuration
+#block-views-the-team-block {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  header {
+    display: none;
+  }
+  .block-inner {
+    text-align: center;
+    .content {
+      display: inline-block;
+      zoom:1;
+      *display:inline;
+      .views-row {
+        float: left;
+        margin: 0 10px;
+        .node-title {
+          font-size: 110%;
+          margin-bottom: 0;
+        }
+        img {
+          padding: 5px 0;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+//team member teaser 
+.field-name-field-about-the-author {
+  clear: both;
+  .field-name-field-picture {
+    float: left;
+    margin-right: 15px;
+  }
+}
+

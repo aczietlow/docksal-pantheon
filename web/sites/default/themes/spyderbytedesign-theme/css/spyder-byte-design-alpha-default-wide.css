@@ -1,0 +1,36 @@
+/* This file will hold styles that are loaded using the same media query as the wide grid. */
+/* line 4, ../sass/spyder-byte-design-alpha-default-wide.scss */
+#page #page-title {
+  width: 106%;
+  margin-left: -3%;
+}
+/* line 10, ../sass/spyder-byte-design-alpha-default-wide.scss */
+#page .grid-18 #page-title, #page .grid-16 #page-title {
+  width: 108%;
+  margin-left: -4%;
+}
+
+/* line 20, ../sass/spyder-byte-design-alpha-default-wide.scss */
+.front #block-views-front-page-drop-block-block .node-title {
+  width: 116%;
+  margin-left: -8%;
+}
+/* line 26, ../sass/spyder-byte-design-alpha-default-wide.scss */
+.front .region-content .node-title, .front .region-content .block-title {
+  width: 108%;
+  margin-left: -4%;
+}
+/* line 31, ../sass/spyder-byte-design-alpha-default-wide.scss */
+.front .block-title {
+  text-align: center;
+  width: 124%;
+  margin-left: -12%;
+  -webkit-box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 39, ../sass/spyder-byte-design-alpha-default-wide.scss */
+#block-tagclouds-2 {
+  font-size: 100%;
+}

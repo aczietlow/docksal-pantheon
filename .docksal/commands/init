@@ -1,0 +1,240 @@
+#!/usr/bin/env bash
+
+## Initialize a Docksal powered Drupal 7 site
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+# @TODO Add token/permission to dockerhub to pull down db container.
+
+#-------------------------- Settings --------------------------------
+
+# PROJECT_ROOT is passed from fin.
+# The following variables are configured in the 'docksal.env' file: DOCROOT, VIRTUAL_HOST.
+
+SITE_DIRECTORY="default"
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+
+#-------------------------- END: Settings --------------------------------
+
+#-------------------------- Helper functions --------------------------------
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+is_windows ()
+{
+	local res=$(uname | grep 'CYGWIN_NT')
+	if [[ "$res" != "" ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+is_linux ()
+{
+    uname | grep 'Linux' >/dev/null
+}
+
+# Yes/no confirmation dialog with an optional message
+# @param $1 confirmation message
+_confirm ()
+{
+
+while true; do
+    read -p "$1 [y/n]: " answer
+    case "$answer" in
+        [Yy]|[Yy][Ee][Ss] )
+            break
+            ;;
+        [Nn]|[Nn][Oo] )
+            exit 1
+            ;;
+        * )
+        echo 'Please answer yes or no.'
+    esac
+done
+}
+
+# Exits fin if previous command exited with non-zero code
+if_failed ()
+{
+    if [ ! $? -eq 0 ]; then
+        echo-red "$*"
+        exit 1
+    fi
+}
+
+# Copy a settings file.
+# Skips if the destination file already exists.
+# @param $1 source file
+# @param $2 destination file
+copy_settings_file()
+{
+	local source="$1"
+	local dest="$2"
+
+	if [[ ! -f $dest ]]; then
+		echo "Copying ${dest}..."
+		cp $source $dest
+	else
+		echo-yellow "${dest} already in place."
+	fi
+}
+
+#-------------------------- END: Helper functions --------------------------------
+
+#-------------------------- Functions --------------------------------
+
+# Initialize local settings files
+init_settings ()
+{
+	copy_settings_file "${PROJECT_ROOT}/config/settings.docksal.php" "${SITEDIR_PATH}/settings.local.php"
+	copy_settings_file "${PROJECT_ROOT}/config/behat.yml.dist" "${PROJECT_ROOT}/behat.yml"
+	if [ -z $DOCKER_CI_SERVER ]; then
+	    copy_settings_file "${PROJECT_ROOT}/config/docksal-local.env" "${PROJECT_ROOT}/.docksal/docksal-local.env"
+	    copy_settings_file "${PROJECT_ROOT}/config/docksal-local.yml" "${PROJECT_ROOT}/.docksal/docksal-local.yml"
+	fi
+}
+
+# Install project dependencies
+install_dependencies ()
+{
+cd $PROJECT_ROOT
+# Make sure Composer dependencies are installed
+if [[ ! -d "$PROJECT_ROOT/vendor" ]]; then
+	fin exec "composer install --prefer-source --no-interaction"
+fi
+
+# TODO: Install FED dependencies too.
+#if [ -z $DOCKER_CI_SERVER ]; then
+#   Install FED stuffs.
+#fi
+}
+# Create the file directory.
+create_directories ()
+{
+    if [[ ! -d "${SITEDIR_PATH}/files" ]]; then
+        mkdir "${SITEDIR_PATH}/files"
+    fi
+
+    if [[ ! -d "${SITEDIR_PATH}/files/private" ]]; then
+        mkdir "${SITEDIR_PATH}/files/private"
+    fi
+
+}
+# Fix file/folder permissions
+fix_permissions ()
+{
+	echo-green "Making site directory writable..."
+	chmod 755 "${SITEDIR_PATH}"
+}
+
+# Configures docksal VM settings.
+configure_docksal_vm ()
+{
+    # Again... Dixon's db is a problem child.
+    export VBOX_HDD=90000
+}
+
+add_hosts()
+{
+    dixon_domains="local.cms.dixonvalve.com,local-australia.cms.dixonvalve.com,local-china.cms.dixonvalve.com,local-india.cms.dixonvalve.com,local-singapore.cms.dixonvalve.com,local-canada.cms.dixonvalve.com,local-europe.cms.dixonvalve.com"
+    if ! grep -q $dixon_domains "/etc/hosts"; then
+       fin hosts add $dixon_domains
+     fi
+}
+
+rebuild_cache()
+{
+  cd $DOCROOT_PATH
+
+	# Kick the cache thrice times, just to be sure.
+	fin exec "drush cc all"
+}
+
+enable_dev_modules()
+{
+  fin exec "drush en dixon_development -y"
+}
+
+fix_solr()
+{
+  fin solr
+}
+
+#-------------------------- END: Functions --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+if [[ "$PROJECT_ROOT" == "" ]]; then
+	echo-red "\$PROJECT_ROOT is not set"
+	exit 1
+fi
+
+if [ -z $DOCKER_CI_SERVER ]; then
+    echo-red "Fin init will destroy and recreate the entire project. All database changes will be lost."
+    _confirm "Are you sure you want to continue?"
+fi
+# Project initialization steps
+echo -e "${green_bg} Step 1 ${NC}${green} Initializing local project configuration...${NC}"
+create_directories
+fix_permissions
+init_settings
+
+if [ !is_linux ]; then
+    configure_docksal_vm
+fi
+
+if [[ $DOCKER_RUNNING == "true" ]]; then
+    if [ -z $DOCKER_CI_SERVER ]; then
+	echo -e "${green_bg} Step 2 ${NC}${green} Docker is already running. Use fin reset if you need to recreate a container${NC}"
+	fin reset -f
+	fi
+else
+	echo -e "${green_bg} Step 2 ${NC}${green} Creating services...${NC}"
+	fin up
+fi
+
+if [ -z $DOCKER_CI_SERVER ]; then
+    # @TODO It currently takes mysql WAY TOO LONG TO INITIALIZE
+    # See https://github.com/docksal/docksal/pull/141
+    echo "Waiting for MySQL to initialize... (It's a big database)";
+    sleep 240
+fi
+
+echo -e "${green_bg} Step 3 ${NC}${green} Initializing Drupal...${NC}"
+install_dependencies
+fin sanitize-db
+rebuild_cache
+fix_solr
+
+if is_windows; then
+    # TODO: I think the VM ip is already set as a variable.
+	echo-green "Add ${VIRTUAL_HOST} to your hosts file (/etc/hosts), e.g.:"
+	echo-green "192.168.64.100 ${VIRTUAL_HOST}"
+	echo
+else
+    echo -e "${green_bg} Step 4 ${NC}${green} Adding hosts entries${NC}"
+    add_hosts
+fi
+
+if [ -z $DOCKER_CI_SERVER ]; then
+    echo -en "${green_bg} DONE! May the swage be with you. ${NC} "
+    echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
+    fin uli
+fi
+#-------------------------- END: Execution --------------------------------
