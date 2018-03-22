@@ -10,10 +10,12 @@ services:
     volumes:
       # Project root volume
       - project_root:/var/www:ro
+      - ${PROJECT_ROOT}/.docksal/etc/apache/host.conf:/usr/local/apache2/conf/extra/includes/host.conf:ro
     labels:
       - io.docksal.virtual-host=${VIRTUAL_HOST},*.${VIRTUAL_HOST}
       - io.docksal.project-root=${PROJECT_ROOT}
     environment:
+      - APACHE_FILE_PROXY
       - APACHE_DOCUMENTROOT=/var/www/${DOCROOT:-docroot}
     depends_on:
       - cli
