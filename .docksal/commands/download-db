@@ -7,10 +7,36 @@
 # Abort if anything fails
 set -e
 
+
+is_linux ()
+{
+    uname | grep 'Linux' >/dev/null
+}
+
+set_latest_backup_timestamp ()
+{
+    latest_backup_date=$(fin terminus backup:info ${PANTHEON_SITE}.live --field date)
+    if is_linux; then
+        latest_backup_timestamp=$(date -d "${latest_backup_date}" +%s)
+    else
+        latest_backup_timestamp=$(date -j -f "%Y-%m-%d %H:%M:%S" "${latest_backup_date}" "+%s")
+    fi
+}
+
+set_now_timestamp ()
+{
+    if is_linux; then
+        now_timestamp=$(date +%s)
+    else
+        now_timestamp=$(date -j -v-1d +%s)
+    fi
+}
+
 SITE_DIRECTORY="default"
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
 ARTIFACT_PATH="${PROJECT_ROOT}/artifacts"
+CLI_ARTIFACT_PATH="/var/www/artifacts"
 TERMINUS="${PROJECT_ROOT}/bin/terminus"
 
 # Console colors
@@ -35,28 +61,32 @@ if [[ ! -d "$PROJECT_ROOT/vendor" ]]; then
 fi
 
 # Fetch the date of the most recent backup on the live environment.
-# TODO make work on Linux too. BSD ships with a different date.
-latest_backup_date=$(${TERMINUS} backup:info ${PANTHEON_SITE}.live --field date)
-latest_backup_timestamp=$(date -j -f "%Y-%m-%d %H:%M:%S" "${latest_backup_date}" "+%s")
-now_timestamp=$(date -j -v-1d +%s)
+set_latest_backup_timestamp
+set_now_timestamp
+
 # If latest backup is older than 24 hours get a new one.
 if [[ $(( $latest_backup_timestamp - 60*60*24 )) < $(($now_timestamp - 60*60*24)) ]]
 then
-  echo -e "${green_bg} Creating Backup ${NC}${green} Couldn't find a backup less than 24 hours old.${NC}"
-  $TERMINUS backup:create ${PANTHEON_SITE}.live --element=db
+    echo -e "${green_bg} Creating Backup ${NC}${green} Couldn't find a backup less than 24 hours old.${NC}"
+    fin terminus backup:create ${PANTHEON_SITE}.live --element=db
+    set_latest_backup_timestamp
 fi
 
-echo -e "${green_bg} Fetching ${NC}${green} Fetching new backup ${NC}"
-$TERMINUS backup:get ${PANTHEON_SITE}.live --element=db --to=$ARTIFACT_PATH/$latest_backup_timestamp.gz
-echo -e "${green_bg} Extracting ${NC}${green} Extracting new backup ${NC}"
-gunzip $ARTIFACT_PATH/$latest_backup_timestamp.gz
+if [ -f $ARTIFACT_PATH/$latest_backup_timestamp ]; then
+    echo -e "${green} Currently downloaded database is newer than 24 hours. Skipping download.${NC}"
+else
+    echo -e "${green_bg} Fetching ${NC}${green} Fetching new backup ${NC}"
+    fin terminus backup:get ${PANTHEON_SITE}.live --element=db --to=$CLI_ARTIFACT_PATH/$latest_backup_timestamp.gz
+    echo -e "${green_bg} Extracting ${NC}${green} Extracting new backup ${NC}"
+    gunzip $ARTIFACT_PATH/$latest_backup_timestamp.gz
+fi
 
 # Import db into Drupal.
 echo-green "Importing db..."
 # TODO make mysql_import faster.
-fin db import $ARTIFACT_PATH/$latest_backup_timestamp
+fin sqli $ARTIFACT_PATH/$latest_backup_timestamp
 echo-green "Waiting for MySQL to initialize..."
-sleep 120
+sleep 10
 
 echo -e "${green_bg} Sanitizing ${NC}${green}Making the database safe again ${NC}"
 fin sanitize-db
